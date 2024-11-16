@@ -60,11 +60,11 @@ jobs:
 
       - name: Set environment variables for database connection
         run: |
-          az webapp config appsettings set --resource-group <resource-group-name> --name monopee --settings \
-          DB_SERVER=<your-db-server> \
+          az webapp config appsettings set --resource-group lab09 --name monopee --settings \
+          DB_SERVER= bsbsbsbs.postgres.database.azure.com \
           DB_PORT=5432 \
-          DB_DATABASE=<your-db-name> \
-          DB_USER=<your-db-username> \
+          DB_DATABASE=postgres \
+          DB_USER=kdh29@calvin.edu \
           DB_PASSWORD=${{ secrets.DB_PASSWORD }}
 
       - name: 'Deploy to Azure Web App'
