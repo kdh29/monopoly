@@ -54,9 +54,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_1E90AE9A1E434211812FA61710CC0F0E }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_A5F8D710B1C34C07A40D0258B1E70698 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_B6E3987AB8FB41FEBF0CB06513B9F408 }}
 
       - name: Set environment variables for database connection
         run: |
