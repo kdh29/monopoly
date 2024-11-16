@@ -1,6 +1,3 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
 name: Build and deploy Node.js app to Azure Web App - monopee
 
 on:
@@ -43,7 +40,7 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write #This is required for requesting the JWT
+      id-token: write
 
     steps:
       - name: Download artifact from build job
@@ -57,15 +54,22 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_1E90AE9A1E434211812FA61710CC0F0E }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_A5F8D710B1C34C07A40D0258B1E70698 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_B6E3987AB8FB41FEBF0CB06513B9F408 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID }}
+
+      - name: Set environment variables for database connection
+        run: |
+          az webapp config appsettings set --resource-group <resource-group-name> --name monopee --settings \
+          DB_SERVER=<your-db-server> \
+          DB_PORT=5432 \
+          DB_DATABASE=<your-db-name> \
+          DB_USER=<your-db-username> \
+          DB_PASSWORD=${{ secrets.DB_PASSWORD }}
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'monopee'
-          slot-name: 'Production'
           package: .
-          
